@@ -1,11 +1,9 @@
-
 @Parallel
 Feature: Case 3
 
   Background:
     Given the user is on the Base page
     And the user should be able to login
-    #And page title has to match this title "GetirYemek - Yemek siparişi artık Getir farkıyla!"
 
 
   Scenario Outline: check the search
@@ -15,5 +13,5 @@ Feature: Case 3
     Examples:
       | searchItem |
       | pizza      |
-      | lahmacun    |
+      | lahmacun   |
       | kebap      |
