@@ -115,9 +115,10 @@ public class BrowserUtils {
      *
      * @return
      */
-    public static WebElement waitForClickablility(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
-        return wait.until(ExpectedConditions.elementToBeClickable(element));
+    public static void waitForClickablility(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.elementToBeClickable(element));
+        element.click();
     }
 
     /**
@@ -389,6 +390,12 @@ public class BrowserUtils {
     public static void scrolToPage(){
         JavascriptExecutor jse = (JavascriptExecutor) Driver.get();
         jse.executeScript("window.scrollBy(0,250)");
+    }
+
+    public static void waitForClickablilityActions(WebElement element) {
+        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
+        wait.until(ExpectedConditions.visibilityOf(element));
+        new Actions(Driver.get()).moveToElement(element).pause(1).click().perform();
     }
 
 }
