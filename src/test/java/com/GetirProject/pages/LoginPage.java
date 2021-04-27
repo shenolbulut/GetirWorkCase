@@ -31,6 +31,7 @@ public class LoginPage extends Dashboard {
      */
 
     public void login(){
+        new Dashboard().acceptThecookis();
         String phoneNumber= ConfigurationReader.get("phoneNumber");
         new Dashboard().switchFromTab("Giriş yap").click();
         getirSifresiIle.click();

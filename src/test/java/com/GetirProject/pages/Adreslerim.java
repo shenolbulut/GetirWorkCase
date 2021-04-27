@@ -46,7 +46,7 @@ public class Adreslerim extends Dashboard{
     }
 
     /**
-     * this method gives you the element of inputs accroding to placeholder from Adreslerim page
+     * this method gives you the element of inputs according to placeholder from Adreslerim page
      *
      * @param address
      *
@@ -57,13 +57,15 @@ public class Adreslerim extends Dashboard{
     }
 
 
+
     /**
      * this method create an address beyond your willing address type. Map comes from feature files
-     *          scenario outline and then step definitions then to this method.
+     *          scenario datas. and then step definitions then to this method. and also I am using
+     *          "inputAddressType()" method in this method which is created in this class(above)
      *
      * @param address
      *
-     * @return
+     * @return void
      */
 
     public void createAddress(Map<String,Object> address){

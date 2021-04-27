@@ -23,22 +23,13 @@ public class RestoranPage extends Dashboard{
     @FindBy(xpath = "//button[contains(.,'Sepete Ekle')]")
     public WebElement sepeteEkleButton;
 
-    @FindBy(xpath = "//button[contains(.,'Sepete git')]/..")
+    @FindBy(xpath = "//article[contains(.,'Sepete git')]/div[3]/button")
     public WebElement sepeteGitButton;
-
-    @FindBy(xpath = "(//*[@class='style__Products-bj8eho-0 kiNHRJ']//span)[1]")
-    public WebElement sepettekiUrunler;
-
-    @FindBy(xpath = "(//*[@name='delete-1'])[1]")
-    public WebElement deleteFromSepet;
-
-    @FindBy(css = ".style__Wrapper-sc-6ivys6-1.haSjLq.style__OkButton-vk2nyz-8.gnGJVu")
-    public WebElement deleteEvetBttn;
 
     @FindBy(xpath = "//*[contains(.,'Lütfen seçim yapınız.')]")
     public WebElement birTerchiYapın;
 
-    @FindBy(xpath = "//*[@data-testid='select']")
+    @FindBy(xpath = "//div/div/div/div/select")
     public List<WebElement> terchilerSelectTag;
 
     @FindBy(css = ".style__RadioWrapper-kjjl1a-2.fpjBvn")
@@ -47,55 +38,72 @@ public class RestoranPage extends Dashboard{
     @FindBy(xpath = "//input[@type='checkbox']")
     public List<WebElement> tercihlerimChekbox;
 
+    @FindBy(xpath = "(//*[@data-index='2'])[2]")
+    public WebElement kebap;
 
 
 
 
 
-    public boolean compareTheProduct(String prodText){
-        BrowserUtils.waitFor(2);
-            if(sepettekiUrunler.getText().toLowerCase().contains(prodText.toLowerCase())) {
-                return true;
-            }else return false;
-    }
+    /**
+     * this method is about to solve the "sepete ekle" button. because some products have different
+     *      choose which are mandatory to select. you cannot click without choosing that options.
+     *      Some options are designed with dropdown(select tag), some are designed radio button and
+     *      some are designed checkbox button and every product has different options also some products
+     *      have not this options. so This method can handle all situations. Before "bir tercih yapın" alerts
+     *      disappeared, method keeps going working.
+     *
+     * @param
+     *
+     * @return void
+     */
 
-    public void clickSepeteEkle(){
+
+    public void clickSepeteEkle() {
         BrowserUtils.waitForClickablility(sepeteEkleButton);
 
-        while (birTerchiYapın.isDisplayed()){
+        while (birTerchiYapın.isDisplayed()) {
+
             try{
                 for (WebElement element:terchilerSelectTag){
-                    //new Select(element).selectByIndex(2);
-                    for(int i=1; i<tercihlerimChekbox.size()+1; i++) {
-                        new Actions(Driver.get()).moveToElement(element).pause(2).click()
-                                .pause(1).moveToElement(Driver.get()
-                                .findElement(By.xpath("//select["+i+"]//option[2]")))
-                                .pause(1).click().pause(1).perform();
+                    new Select(element).selectByIndex(2);
+
+//                    for(int i=1; i<tercihlerimChekbox.size()+1; i++) {
+//                        new Actions(Driver.get()).moveToElement(element).pause(2).click()
+//                                .pause(2).perform();
+//                        BrowserUtils.waitFor(4);
+//
+//                        new Actions(Driver.get()).moveToElement(Driver.get()
+//                                .findElement(By.xpath("(//select)["+i+"]//option[2]")))
+//                                .pause(2).click().perform();
+//                        BrowserUtils.waitForClickablility(sepeteEkleButton);
+//                    }
+                }
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+                try {
+                    for (WebElement elem : tercihlerRadioBttn) {
+                        if (!elem.isSelected()) elem.click();
+                        BrowserUtils.waitForClickablility(sepeteEkleButton);
                     }
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-            }catch (NoSuchElementException e){
-                e.printStackTrace();
+                try {
+                    for (WebElement elm : tercihlerimChekbox) {
+                        if (!elm.isSelected()) elm.click();
+                        BrowserUtils.waitForClickablility(sepeteEkleButton);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
 
-            try{
-                for (WebElement element:tercihlerRadioBttn){
-                    if(!element.isSelected())element.click();
-                }
-            }catch (NoSuchElementException e){
-                e.printStackTrace();
-            }
-            try {
-                for(WebElement element:tercihlerimChekbox){
-                    if(!element.isSelected())element.click();
-                }
-            }catch (NoSuchElementException e){
-                e.printStackTrace();
-            }
-            BrowserUtils.waitForClickablility(sepeteEkleButton);
         }
-    }
-
-
 
 
 }
+

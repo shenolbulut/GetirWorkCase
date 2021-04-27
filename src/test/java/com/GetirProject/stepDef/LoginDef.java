@@ -28,7 +28,7 @@ public class LoginDef {
 
     @And("the user clicks the getir password button")
     public void theUserClicksTheGetirPasswordButton() {
-        BrowserUtils.clickWithTimeOut(new LoginPage().submitButton,10);
+        BrowserUtils.clickWithTimeOut(new LoginPage().getirSifresiIle,10);
     }
 
     @And("the user enters  a valid phoneNumber")

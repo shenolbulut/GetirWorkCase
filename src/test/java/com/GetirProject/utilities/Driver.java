@@ -36,7 +36,7 @@ public class Driver {
 
 //            if we pass the driver from terminal then use that one
 //           if we do not pass the driver from terminal then use the one properties file
-            String browser = System.getProperty("browser") != null ? browser = System.getProperty("browser") : ConfigurationReader.get("browser");
+            String browser =  System.getProperty("browser") != null ? browser = System.getProperty("browser") : ConfigurationReader.get("browser");
 
             switch (browser) {
                 case "chrome":
@@ -78,11 +78,16 @@ public class Driver {
 
                 case "remote_chrome":
                     ChromeOptions chromeOptions = new ChromeOptions();
+
                     chromeOptions.setCapability("platform", Platform.ANY);
+                    chromeOptions.addArguments("--headless");
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+
                     try {//https:amanin:05b18249-46d4-476f-b78e-a6f059ac9496@ondemand.apac-southeast-1.saucelabs.com:443/wd/hub
                     //driverPool.set(new RemoteWebDriver(new URL("http://3.236.102.181:4444/wd/hub"),chromeOptions));
-                    driverPool.set(new RemoteWebDriver(new URL("https:localhost:444/wd/hub"),chromeOptions));
-                    } catch (MalformedURLException e) {
+                    driverPool.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),chromeOptions));
+                    } catch (Exception e) {
                         e.printStackTrace();
                     }
                     break;
@@ -91,8 +96,11 @@ public class Driver {
                     FirefoxOptions firefoxOptions=new FirefoxOptions();
                     firefoxOptions.setCapability("platform", Platform.ANY);
 
+                    firefoxOptions.addArguments("--headless");
+                    firefoxOptions.addArguments("--no-sandbox");
+                    firefoxOptions.addArguments("--disable-dev-shm-usage");
                     try{
-                        driverPool.set(new RemoteWebDriver(new URL("http:localhost:4444/wd/hub"), firefoxOptions));
+                        driverPool.set(new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"), firefoxOptions));
                     }catch (MalformedURLException e){
                         e.printStackTrace();
                     }

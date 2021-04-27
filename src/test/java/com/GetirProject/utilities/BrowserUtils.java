@@ -92,7 +92,7 @@ public class BrowserUtils {
      * @return
      */
     public static WebElement waitForVisibility(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 10);
         return wait.until(ExpectedConditions.visibilityOf(element));
     }
 
@@ -104,7 +104,7 @@ public class BrowserUtils {
      * @return
      */
     public static WebElement waitForVisibility(By locator) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 10);
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
     }
 
@@ -116,7 +116,7 @@ public class BrowserUtils {
      * @return
      */
     public static void waitForClickablility(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 20);
         wait.until(ExpectedConditions.elementToBeClickable(element));
         element.click();
     }
@@ -129,7 +129,7 @@ public class BrowserUtils {
      * @return
      */
     public static WebElement waitForClickablility(By locator, int timeout) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(timeout));
+        WebDriverWait wait = new WebDriverWait(Driver.get(), timeout);
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
@@ -145,7 +145,7 @@ public class BrowserUtils {
             }
         };
         try {
-            WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(timeOutInSeconds));
+            WebDriverWait wait = new WebDriverWait(Driver.get(), timeOutInSeconds);
             wait.until(expectation);
         } catch (Throwable error) {
             error.printStackTrace();
@@ -375,7 +375,7 @@ public class BrowserUtils {
      * @param time
      */
     public static void waitForPresenceOfElement(By by, long time) {
-        new WebDriverWait(Driver.get(), Duration.ofSeconds(time)).until(ExpectedConditions.presenceOfElementLocated(by));
+        new WebDriverWait(Driver.get(), time).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
     public static List<String> getCommaList(String commaList){
@@ -393,7 +393,7 @@ public class BrowserUtils {
     }
 
     public static void waitForClickablilityActions(WebElement element) {
-        WebDriverWait wait = new WebDriverWait(Driver.get(), Duration.ofSeconds(20));
+        WebDriverWait wait = new WebDriverWait(Driver.get(), 20);
         wait.until(ExpectedConditions.visibilityOf(element));
         new Actions(Driver.get()).moveToElement(element).pause(1).click().perform();
     }

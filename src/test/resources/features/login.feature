@@ -2,7 +2,7 @@
 @Parallel
 Feature: Case 1
 
-
+  @login
   Scenario: Automate the lobin page
     Given the user is on the Base page
     When the user clicks the "Giriş yap" button
